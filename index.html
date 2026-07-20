@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To My Forever Favorite Person</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine: #3d0f1c;
+    --burgundy: #7a1f34;
+    --rose: #c14a5f;
+    --blush: #f3d7d9;
+    --cream: #fbf1ea;
+    --gold: #c79a5b;
+    --ink: #3a2226;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--wine);
+    color: var(--cream);
+    font-family: 'Lora', serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- Falling petals ---------- */
+  #petals{
+    position: fixed; inset:0; pointer-events:none; z-index: 5; overflow:hidden;
+  }
+  .petal{
+    position:absolute; top:-10%;
+    opacity:.85;
+    animation: fall linear infinite;
+    will-change: transform;
+  }
+  .petal svg{ width:100%; height:100%; display:block; }
+  @keyframes fall{
+    0%{ transform: translateY(-10vh) translateX(0) rotate(0deg); }
+    100%{ transform: translateY(110vh) translateX(var(--drift,20px)) rotate(360deg); }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height: 100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+    padding: 6vh 6vw;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(193,74,95,.35), transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(122,31,52,.5), transparent 55%),
+      var(--wine);
+  }
+  .eyebrow{
+    font-family:'Cormorant Garamond', serif;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    font-size: .8rem;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+    opacity:0;
+    animation: riseIn 1.2s ease forwards .3s;
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-style: italic;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height:1.08;
+    margin: 0 0 1.4rem;
+    color: var(--cream);
+    text-shadow: 0 0 40px rgba(193,74,95,.5);
+    opacity:0;
+    animation: riseIn 1.2s ease forwards .6s;
+  }
+  .hero h1 em{
+    display:block;
+    font-family:'Dancing Script', cursive;
+    font-style:normal;
+    font-weight:700;
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    color: var(--rose);
+    margin-top:.1em;
+  }
+  .hero .sub{
+    max-width: 34ch;
+    font-size: 1.05rem;
+    color: var(--blush);
+    opacity:0;
+    animation: riseIn 1.2s ease forwards .9s;
+  }
+  @keyframes riseIn{
+    from{ opacity:0; transform: translateY(18px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .scroll-cue{
+    margin-top: 3.5rem;
+    font-family:'Cormorant Garamond',serif;
+    font-size:.75rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color: var(--gold);
+    opacity:.8;
+    animation: bob 2.6s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); opacity:.5; }
+    50%{ transform: translateY(8px); opacity:1; }
+  }
+
+  /* signature rose divider */
+  .rose-divider{ display:flex; justify-content:center; margin: 2.4rem 0; }
+  .rose-divider svg{ width: 64px; height: 64px; }
+
+  /* ---------- Letter section ---------- */
+  section{ position:relative; z-index:2; }
+  .letter-wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 8vh 7vw 10vh;
+  }
+  .letter{
+    background: linear-gradient(180deg, var(--cream), #f6e7de);
+    color: var(--ink);
+    border-radius: 4px;
+    padding: clamp(2rem, 6vw, 4.5rem);
+    box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(199,154,91,.25);
+    position: relative;
+  }
+  .letter::before{
+    content:"";
+    position:absolute; inset: 10px;
+    border: 1px solid rgba(122,31,52,.18);
+    pointer-events:none;
+  }
+  .letter h2{
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--burgundy);
+    margin: 0 0 .3rem;
+  }
+  .letter .to{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--wine);
+    margin: 0 0 1.6rem;
+  }
+  .letter p{
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin: 0 0 1.25rem;
+    opacity:0;
+    transform: translateY(14px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+  .letter p.visible{ opacity:1; transform: translateY(0); }
+  .letter p.emphasis{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--burgundy);
+    text-align:center;
+    margin: 1.8rem 0;
+  }
+  .letter p.whisper{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rose);
+  }
+  .signoff{
+    margin-top: 2.4rem;
+    text-align:right;
+    font-family:'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--burgundy);
+  }
+  .surprise-line{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    color: var(--gold);
+    letter-spacing: .04em;
+    margin: 2rem 0;
+  }
+
+  /* ---------- Poem section ---------- */
+  .poem-section{
+    padding: 10vh 6vw 12vh;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(193,74,95,.3), transparent 60%),
+      var(--wine);
+  }
+  .poem-title{
+    font-family:'Cormorant Garamond', serif;
+    text-transform: uppercase;
+    letter-spacing:.3em;
+    font-size:.85rem;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .poem{
+    max-width: 560px;
+    margin: 0 auto;
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.9;
+    color: var(--blush);
+  }
+  .poem .heart{ color: var(--rose); font-style: normal; }
+
+  /* ---------- Closing ---------- */
+  .closing{
+    padding: 8vh 6vw 12vh;
+    text-align:center;
+  }
+  .closing .moon{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    max-width: 40ch;
+    margin: 0 auto 2rem;
+    color: var(--blush);
+    font-size: 1.15rem;
+    line-height:1.8;
+  }
+  .forever{
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    color: var(--rose);
+  }
+  .stars{ margin-top: 1.5rem; opacity:.7; letter-spacing: 1rem; color: var(--gold); }
+
+  footer{
+    text-align:center;
+    padding: 3rem 1rem 4rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: .9rem;
+    color: rgba(251,241,234,.55);
+  }
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
+<section class="hero">
+  <div class="eyebrow">A little something, made just for you</div>
+  <h1>To My Forever Favorite Person<em>Alfiya</em></h1>
+  <p class="sub">Before you fly off to chase your dreams &mdash; something I needed you to have.</p>
+  <div class="scroll-cue">scroll down ↓</div>
+</section>
+
+<section class="letter-wrap">
+  <div class="rose-divider">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 20 C40 20 32 28 32 38 C32 48 42 54 50 62 C58 54 68 48 68 38 C68 28 60 20 50 20 Z" fill="#c14a5f" opacity="0.9"/>
+      <path d="M50 25 C44 27 40 32 40 38 C40 45 46 49 50 54 C54 49 60 45 60 38 C60 32 56 27 50 25 Z" fill="#7a1f34"/>
+      <path d="M50 62 L50 90" stroke="#3d5a3d" stroke-width="3"/>
+      <path d="M50 74 C42 74 38 68 38 68 C38 68 44 78 50 78" fill="#3d5a3d"/>
+      <path d="M50 82 C58 82 62 76 62 76 C62 76 56 86 50 86" fill="#3d5a3d"/>
+    </svg>
+  </div>
+
+  <article class="letter" id="letter">
+    <h2>My dearest,</h2>
+    <p class="to">A letter for the girl who's about to conquer the world.</p>
+
+    <p>In a few days you'll be leaving to start a new chapter of your life abroad. I'm genuinely so proud of you. It makes me happy to see you chasing your dreams, even though I'll miss having you around every day. Life is going to change for both of us. We'll get busy with our studies, work, responsibilities, and different time zones. There will be days when we'll barely get time to talk, and there will be nights when we'll miss each other more than words can explain.</p>
+
+    <p class="whisper">But here's one promise I want you to remember forever...</p>
+
+    <p>I promise to love you every single day. Every morning, every night, every moment in between. Not just today, not just tomorrow, but every day that comes after. My love for you won't become less because of distance &mdash; it will only grow stronger. I'll choose you again and again, every single day.</p>
+
+    <p>I know we've been having a few hard days lately. We've argued, we've gotten angry, we've misunderstood each other, and sometimes we've reacted more than we should have. But none of those fights ever changed one thing...</p>
+
+    <p class="emphasis">I never stopped caring about you. Not for a second.</p>
+
+    <p>No matter how upset I get, my heart still worries about you, still prays for your happiness, still wants to know if you've eaten, if you're smiling, if you're okay. Caring for you isn't something I do because everything is perfect. I do it because I love you, and that's never going to change.</p>
+
+    <p>I don't want you to leave carrying sadness because of our silly fights. I want you to leave with a heart full of happiness, knowing that someone here loves you endlessly and is waiting for every call, every message, every "I reached safely," every little update.</p>
+
+    <p>And honestly... I hope before you leave, we'll sort out these tiny fights. Because you know what? Fights are just a part of love. They don't define us. What defines us is choosing each other after every disagreement. Love isn't about never fighting &mdash; it's about never giving up on each other.</p>
+
+    <p>Hehe... and do you know a little secret? I'm making this website for you because somewhere deep inside my heart, I already know our fights will end. I know one day you'll stop being angry, you'll stop reacting to my messages, and everything will become normal again. And when that day comes...</p>
+
+    <p class="surprise-line">Surpriseeeee! ❤️</p>
+
+    <p>I'll show you this website, and hopefully it'll make you smile that cute smile I love so much. Because I don't just care about today. I care about our future. I care about every memory we'll make, every reunion after the distance, every hug that will make up for the days we couldn't be together, every dream we'll build side by side.</p>
+
+    <p class="emphasis">Distance can separate two places, but it can never separate two hearts that genuinely want each other.</p>
+
+    <p>So go and conquer your dreams, my beautiful girl. I'll be here... loving you, supporting you, believing in you, praying for you, missing you, and choosing you &mdash; every single day.</p>
+
+    <p>Take care of yourself for me. And whenever you look at the sky, just remember... no matter which country we're in, we're still under the same moon, the same stars, and the same promise.</p>
+
+    <p>I love you today. I'll love you tomorrow. And I'll keep loving you a little more with every passing day.</p>
+
+    <div class="signoff">Forever yours ❤️</div>
+  </article>
+</section>
+
+<section class="poem-section">
+  <div class="poem-title">For My Beautiful Girl</div>
+  <div class="poem">
+    Across the oceans, across the skies so blue,<br>
+    Every heartbeat whispers, "I'm still loving you."<br>
+    No distance can dim the light within your eyes,<br>
+    You're my forever, my home beneath all skies. <span class="heart">❤️</span>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="rose-divider">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 20 C40 20 32 28 32 38 C32 48 42 54 50 62 C58 54 68 48 68 38 C68 28 60 20 50 20 Z" fill="#c14a5f" opacity="0.9"/>
+      <path d="M50 25 C44 27 40 32 40 38 C40 45 46 49 50 54 C54 49 60 45 60 38 C60 32 56 27 50 25 Z" fill="#7a1f34"/>
+    </svg>
+  </div>
+  <p class="moon">No matter which country we're in, we're still under the same moon, the same stars, and the same promise.</p>
+  <div class="forever">Forever yours.</div>
+  <div class="stars">✦ ✧ ✦</div>
+</section>
+
+<footer>made with a whole lot of love, just for you</footer>
+
+<script>
+  // falling rose petals
+  const container = document.getElementById('petals');
+  const petalSVG = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 4 C10 4 4 12 4 20 C4 30 14 34 20 38 C26 34 36 30 36 20 C36 12 30 4 20 4 Z" fill="currentColor"/>
+  </svg>`;
+  const colors = ['#c14a5f', '#7a1f34', '#f3d7d9', '#c79a5b'];
+  const count = window.innerWidth < 640 ? 12 : 22;
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100 + 'vw';
+    const size = 10 + Math.random()*16;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.color = colors[Math.floor(Math.random()*colors.length)];
+    const dur = 12 + Math.random()*14;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = (Math.random()*dur) + 's';
+    p.style.setProperty('--drift', (Math.random()*140-70) + 'px');
+    p.innerHTML = petalSVG;
+    container.appendChild(p);
+  }
+
+  // reveal letter paragraphs on scroll
+  const paras = document.querySelectorAll('.letter p, .signoff');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+  paras.forEach(p=>io.observe(p));
+  document.querySelector('.signoff').style.opacity = 0;
+  document.querySelector('.signoff').style.transform = 'translateY(14px)';
+  document.querySelector('.signoff').style.transition = 'opacity .9s ease, transform .9s ease';
+</script>
+
+</body>
+</html>
